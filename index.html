@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin — Perpustakaan Ceria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="login panel" id="login">
+  <span class="eyebrow">Area petugas</span>
+  <h1 class="title" style="font-size:1.6rem">Masuk Admin 🔐</h1>
+  <label class="mono mut" style="font-size:.7rem" for="pw">KATA SANDI</label>
+  <input class="in-f" id="pw" type="password" onkeydown="if(event.key==='Enter')login()" style="margin:6px 0 14px">
+  <button class="btn" onclick="login()">Masuk</button>
+  <p class="mut" style="font-size:.78rem;margin-bottom:0">Pengecekan kata sandi hanya di browser, jadi belum aman untuk dipakai sungguhan.</p>
+</div>
+
+<div id="app" class="hide">
+<nav class="top"><div class="in">
+  <div class="brand">📚 Perpustakaan Ceria<small>ADMIN</small></div>
+  <div class="pills">
+    <button class="pill" data-t="ringkasan" onclick="tab('ringkasan')">🏠 Ringkasan</button>
+    <button class="pill" data-t="buku" onclick="tab('buku')">📖 Kelola Buku</button>
+    <button class="pill" data-t="pinjaman" onclick="tab('pinjaman')">🔖 Peminjaman</button>
+    <button class="pill" data-t="pengumuman" onclick="tab('pengumuman')">📣 Pengumuman</button>
+    <button class="pill" onclick="logout()">Keluar</button>
+  </div>
+</div></nav>
+
+<div class="wrap">
+  <section id="t-ringkasan">
+    <span class="eyebrow">Panel Petugas</span><h1 class="title">Ringkasan</h1>
+    <div class="stats" id="stats"></div>
+    <div class="two">
+      <div class="panel"><h2>🗂️ Isi rak per tema</h2><div id="shelves"></div></div>
+      <div class="panel"><h2>⏰ Perlu ditindaklanjuti</h2><div id="attn"></div></div>
+    </div>
+    <div class="panel"><h2>🕘 Aktivitas terbaru</h2><div id="log"></div></div>
+  </section>
+
+  <section id="t-buku" class="hide">
+    <span class="eyebrow">Koleksi</span><h1 class="title">Kelola Buku</h1>
+    <div class="panel"><h2 id="ftitle">➕ Tambah buku</h2>
+      <div class="form">
+        <div><label for="fj">JUDUL</label><input class="in-f" id="fj"></div>
+        <div><label for="fp">PENULIS</label><input class="in-f" id="fp"></div>
+        <div><label for="ft">TEMA</label><select class="in-f" id="ft"></select></div>
+        <div style="display:flex;gap:6px"><button class="btn" id="fs" onclick="saveBook()">Simpan</button><button class="btn out hide" id="fc" onclick="resetForm()">Batal</button></div>
+      </div>
+    </div>
+    <div class="panel tw"><table><thead><tr><th>Judul</th><th>Tema</th><th>Status</th><th></th></tr></thead><tbody id="abooks"></tbody></table></div>
+  </section>
+
+  <section id="t-pinjaman" class="hide">
+    <span class="eyebrow">Sirkulasi</span><h1 class="title">Peminjaman</h1>
+    <div class="panel tw"><table><thead><tr><th>Buku</th><th>Jatuh tempo</th><th>Status</th><th></th></tr></thead><tbody id="aloans"></tbody></table></div>
+  </section>
+
+  <section id="t-pengumuman" class="hide">
+    <span class="eyebrow">Beranda publik</span><h1 class="title">Pengumuman</h1>
+    <div class="panel"><h2>➕ Pengumuman baru</h2>
+      <div class="form" style="grid-template-columns:1fr 2fr auto">
+        <div><label for="nj">JUDUL</label><input class="in-f" id="nj"></div>
+        <div><label for="ni">ISI SINGKAT</label><input class="in-f" id="ni"></div>
+        <button class="btn" onclick="addAnn()">Terbitkan</button>
+      </div>
+    </div>
+    <div id="aann"></div>
+  </section>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>
